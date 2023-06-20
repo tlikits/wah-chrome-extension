@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "WAH Automate Extension",
+    "description": "Chrome extension for autofill WAH registration form",
+    "version": "1.0",
+    "action": {
+      "default_icon": "icon.png"
+    },
+    "background": {
+        "service_worker": "src/sw.js",
+        "type": "module"
+    },
+    "options_page": "src/options.html",
+    "host_permissions": [
+        "http://161.82.213.251/*"
+    ],
+    "permissions": [
+        "notifications",
+        "scripting",
+        "storage",
+        "unlimitedStorage",
+        "tabs",
+        "webNavigation"
+    ]
+  }

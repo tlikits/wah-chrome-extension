@@ -1,0 +1,17 @@
+{
+  "name": "wah-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wylfent",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "^0.0.237"
+  },
+  "dependencies": {
+    "chrome-storage-largesync": "^0.0.4"
+  }
+}

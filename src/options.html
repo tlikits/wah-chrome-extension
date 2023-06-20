@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAH Extension Options</title>
+</head>
+
+<body>
+    <div>
+        <label for="profile-img">
+            รูปถ่ายหน้าตรง:
+            <input type="file" name="profile-img" id="profile-img" onchange="readURL(this);" />
+            <br>
+            <img id="img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img">
+        </label>
+    </div>
+    <div>
+        <label for="id">
+            เลขประจำตัวประชาชน:
+            <input type="text" name="id" id="id" placeholder="id" />
+        </label>
+    </div>
+    <div>
+        <label for="prefix-th">คำนำหน้า: </label>
+        <select name="prefix-th" id="prefix-th">
+            <option value="นาย">นาย</option>
+            <option value="นาง">นาง</option>
+            <option value="นางสาว">นางสาว</option>
+        </select>
+    </div>
+    <div>
+        <label for="name-th">
+            ชื่อ:
+            <input type="text" name="name-th" id="name-th" placeholder="name-th" />
+        </label>
+    </div>
+    <div>
+        <label for="lastname-th">
+            นามสกุล:
+            <input type="text" name="lastname-th" id="lastname-th" placeholder="lastname-th" />
+        </label>
+    </div>
+    <div>
+        <label for="prefix-en">Name Title: </label>
+        <select name="prefix-en" id="prefix-en">
+            <option value="MR">MR</option>
+            <option value="MRS">MRS</option>
+            <option value="MISS">MISS</option>
+        </select>
+    </div>
+    <div>
+        <label for="name-en">
+            Name:
+            <input type="text" name="name-en" id="name-en" placeholder="name-en" />
+        </label>
+    </div>
+    <div>
+        <label for="lastname-en">
+            Lastname:
+            <input type="text" name="lastname-en" id="lastname-en" placeholder="lastname-en" />
+        </label>
+    </div>
+    <div>
+        <label for="email">
+            อีเมล์:
+            <input type="text" name="email" id="email" placeholder="email" />
+        </label>
+    </div>
+    <div>
+        <label for="address">
+            ที่อยู่ปัจจุบัน:
+            <textarea name="address" id="address" cols="30" rows="10"></textarea>
+        </label>
+    </div>
+    <div>
+        <label for="autosubmit">
+            <input type="checkbox" name="autosubmit" id="autosubmit">
+            Enable auto submit
+        </label>
+    </div>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+    <button id="clear">Clear</button>
+    <script src="chrome-Storage-largeSync.min.js"></script>
+    <script src="options.js"></script>
+</body>
+
+</html>
