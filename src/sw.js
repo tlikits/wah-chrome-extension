@@ -14,6 +14,7 @@ class WahExtension {
             await autoFill.execute()
         } catch (error) {
             console.warn(`Error on autofilling | error=${error.name}, message=${error.message}`)
+            console.warn(error.stack)
         }
     }
 
@@ -133,7 +134,7 @@ class WahRegisterAutoFill {
                 break
             }
             await sleep()
-            chrome.tabs.reload(this.tabId)
+            await chrome.tabs.reload(this.tabId)
         }
     }
 
@@ -153,15 +154,16 @@ class WahRegisterAutoFill {
 
     async submitForm() {
         console.log('Submitting form...')
+        const reloadPromise = this.reloadIfFail()
         const executedResult = await chrome.scripting.executeScript({
             target: { tabId: this.tabId },
             func: submitForm,
         })
         const { result } = executedResult[0]
-        if (!result.success) {
+        if (!result || !result.success) {
             throw new Error(result.reason)
         }
-        return this.reloadIfFail()
+        return reloadPromise
     }
 
     async notify() {
@@ -215,16 +217,16 @@ class WahRegisterAutoFill {
     }
 
     async isFormAvailable() {
-        const executedResult = await chrome.scripting.executeScript({
-            target: { tabId: this.tabId },
-            func: isFormAvailable,
-        })
-        const { result } = executedResult[0]
-        return result.isAvailable
-    }
-
-    async onCloseTab() {
-
+        try {
+            const executedResult = await chrome.scripting.executeScript({
+                target: { tabId: this.tabId },
+                func: isFormAvailable,
+            })
+            const { result } = executedResult[0]
+            return result?.isAvailable ?? false
+        } catch (error) {
+            return false
+        }
     }
 }
 
@@ -331,15 +333,10 @@ function submitForm() {
 function isFormAvailable() {
     try {
         const element = document.getElementsByName('btLogin')[0]
-        return { isAvailable: !!element }
+        return { isAvailable: element != undefined }
     } catch (error) {
         return { isAvailable: false }
     }
-}
-
-function isFormReady() {
-    const formReady = document.querySelector('[name="btLogin"]')
-    return !!formReady
 }
 
 function sleep(timeout) {
